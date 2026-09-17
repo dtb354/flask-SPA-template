@@ -1,0 +1,30 @@
+{% include "partials/_nav.html" %}
+
+<section class="page-body">
+    <h2>Stats</h2>
+
+    <div class="stat-grid">
+        <div class="stat-card">
+            <div class="stat-value">{{ total }}</div>
+            <div class="stat-label">Total</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">{{ active }}</div>
+            <div class="stat-label">Active</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">{{ done }}</div>
+            <div class="stat-label">Done</div>
+        </div>
+    </div>
+
+    <div class="progress-wrap">
+        <div class="progress-label">
+            <span>Completion</span>
+            <span>{{ pct }}%</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: {{ pct }}%;"></div>
+        </div>
+    </div>
+</section>

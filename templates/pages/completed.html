@@ -1,0 +1,18 @@
+{% include "partials/_nav.html" %}
+
+<section class="page-body">
+    <div class="section-header">
+        <h2>Completed</h2>
+        {% if tasks %}
+        <button class="link-btn"
+                hx-post="/completed/clear"
+                hx-target="#completed-list"
+                hx-swap="outerHTML"
+                hx-confirm="Clear all completed tasks?">
+            Clear all
+        </button>
+        {% endif %}
+    </div>
+
+    {% include "partials/_completed_list.html" %}
+</section>

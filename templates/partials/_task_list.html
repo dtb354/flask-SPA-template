@@ -1,0 +1,22 @@
+<ul id="task-list" class="task-list">
+    {% for task in tasks %}
+    <li class="task-item">
+        <label class="task-check">
+            <input type="checkbox"
+                   hx-post="/tasks/{{ task.id }}/toggle"
+                   hx-target="#task-list"
+                   hx-swap="outerHTML">
+            <span>{{ task.text }}</span>
+        </label>
+        <button class="icon-btn danger"
+                hx-delete="/tasks/{{ task.id }}"
+                hx-target="#task-list"
+                hx-swap="outerHTML"
+                title="Delete">
+            ✕
+        </button>
+    </li>
+    {% else %}
+    <li class="empty-state">Nothing to do. Add a task above.</li>
+    {% endfor %}
+</ul>

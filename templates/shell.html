@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/htmx/1.9.12/htmx.min.js"></script>
+    <style>
+        :root {
+            --bg: #f4f5f7;
+            --surface: #ffffff;
+            --border: #e3e5e9;
+            --text: #1f2430;
+            --muted: #6b7280;
+            --accent: #4f46e5;
+            --accent-hover: #4338ca;
+            --danger: #e5484d;
+            --done: #10b981;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+        .app-shell {
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+            background: var(--surface);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 24px rgba(0,0,0,0.06);
+        }
+        .app-bar {
+            padding: 20px 20px 0 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        .app-bar h1 {
+            margin: 0;
+            padding-bottom: 16px;
+            font-size: 1.3rem;
+        }
+        nav.tabs {
+            display: flex;
+            gap: 4px;
+        }
+        nav.tabs a {
+            flex: 1;
+            text-align: center;
+            padding: 10px 4px;
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+        }
+        nav.tabs a.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+        #page {
+            flex: 1;
+            padding: 20px;
+        }
+        .htmx-request #page { opacity: 0.6; transition: opacity 0.1s ease-in; }
+
+        .page-body h2 {
+            margin-top: 0;
+            font-size: 1.05rem;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .add-form {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .add-form input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+        .add-form button,
+        button[type="submit"] {
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .add-form button:hover { background: var(--accent-hover); }
+
+        .task-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .task-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 4px;
+            border-bottom: 1px solid var(--border);
+        }
+        .task-check {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        .task-check input { width: 17px; height: 17px; }
+        .task-check span.done {
+            color: var(--muted);
+            text-decoration: line-through;
+        }
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--muted);
+            font-size: 0.95rem;
+            padding: 4px 8px;
+        }
+        .icon-btn.danger:hover { color: var(--danger); }
+        .empty-state {
+            color: var(--muted);
+            font-style: italic;
+            padding: 20px 4px;
+            text-align: center;
+        }
+        .link-btn {
+            background: none;
+            border: none;
+            color: var(--accent);
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+        .stat-card {
+            background: var(--bg);
+            border-radius: 10px;
+            padding: 16px 8px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+        .stat-label {
+            color: var(--muted);
+            font-size: 0.8rem;
+            margin-top: 4px;
+        }
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+        .progress-bar {
+            background: var(--border);
+            border-radius: 999px;
+            height: 10px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            background: var(--done);
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+        .page-body p { line-height: 1.5; }
+        .page-body .muted { color: var(--muted); font-size: 0.85rem; }
+        code {
+            background: var(--bg);
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-shell">
+        <div class="app-bar">
+            <h1>✓ TaskFlow</h1>
+        </div>
+        <div id="page" hx-history-elt>
+            {% include inner_template %}
+        </div>
+    </div>
+</body>
+</html>

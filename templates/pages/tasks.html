@@ -1,0 +1,14 @@
+{% include "partials/_nav.html" %}
+
+<section class="page-body">
+    <form class="add-form"
+          hx-post="/tasks"
+          hx-target="#task-list"
+          hx-swap="outerHTML"
+          hx-on::after-request="if(event.detail.successful) this.reset()">
+        <input type="text" name="text" placeholder="What needs doing?" required autofocus>
+        <button type="submit">Add</button>
+    </form>
+
+    {% include "partials/_task_list.html" %}
+</section>

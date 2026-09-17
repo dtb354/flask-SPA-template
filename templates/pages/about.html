@@ -1,0 +1,15 @@
+{% include "partials/_nav.html" %}
+
+<section class="page-body">
+    <h2>About TaskFlow</h2>
+    <p>
+        This is a small demo showing how Flask + HTMX can feel like a
+        single-page app without writing any client-side JavaScript framework.
+    </p>
+    <p>
+        Every tab swaps the <code>#page</code> region in place, updates the
+        URL with <code>hx-push-url</code>, and browser back/forward just work
+        because HTMX keeps a history cache of each swap.
+    </p>
+    <p class="muted">Built with Flask, Jinja, and htmx.</p>
+</section>

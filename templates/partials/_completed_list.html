@@ -1,0 +1,23 @@
+<ul id="completed-list" class="task-list">
+    {% for task in tasks %}
+    <li class="task-item">
+        <label class="task-check">
+            <input type="checkbox"
+                   checked
+                   hx-post="/tasks/{{ task.id }}/toggle?from=completed"
+                   hx-target="#completed-list"
+                   hx-swap="outerHTML">
+            <span class="done">{{ task.text }}</span>
+        </label>
+        <button class="icon-btn danger"
+                hx-delete="/tasks/{{ task.id }}?from=completed"
+                hx-target="#completed-list"
+                hx-swap="outerHTML"
+                title="Delete">
+            ✕
+        </button>
+    </li>
+    {% else %}
+    <li class="empty-state">No completed tasks yet.</li>
+    {% endfor %}
+</ul>
