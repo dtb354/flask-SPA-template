@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TaskFlow</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/htmx/1.9.12/htmx.min.js"></script>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
     <style>
         :root {
             --bg: #f4f5f7;
@@ -65,8 +65,6 @@
             flex: 1;
             padding: 20px;
         }
-        .htmx-request #page { opacity: 0.6; transition: opacity 0.1s ease-in; }
-
         .page-body h2 {
             margin-top: 0;
             font-size: 1.05rem;

@@ -1,10 +1,11 @@
 <nav class="tabs">
     {% for item in nav %}
     <a class="{{ 'active' if active == item.key else '' }}"
-       hx-get="{{ item.url }}"
-       hx-target="#page"
-       hx-swap="innerHTML"
-       hx-push-url="true">
+       href="{{ item.url }}"
+       data-get="{{ item.url }}"
+       data-target="#page"
+       data-swap="innerHTML"
+       data-push="true">
         {{ item.label }}
     </a>
     {% endfor %}

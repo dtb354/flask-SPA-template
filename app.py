@@ -23,7 +23,7 @@ NAV = [
 def render_page(template, active_nav, **context):
     """Render a page fragment (for HTMX swaps) or the full shell on a hard load."""
     context.update(nav=NAV, active=active_nav)
-    if request.headers.get("HX-Request"):
+    if request.headers.get("X-Requested-With") == "fetch":
         return render_template(template, **context)
     return render_template("shell.html", inner_template=template, **context)
 

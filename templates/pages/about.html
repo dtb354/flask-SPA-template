@@ -3,13 +3,15 @@
 <section class="page-body">
     <h2>About TaskFlow</h2>
     <p>
-        This is a small demo showing how Flask + HTMX can feel like a
-        single-page app without writing any client-side JavaScript framework.
+        This is a small demo showing how Flask + a bit of vanilla JavaScript
+        can feel like a single-page app without any client-side framework.
     </p>
     <p>
-        Every tab swaps the <code>#page</code> region in place, updates the
-        URL with <code>hx-push-url</code>, and browser back/forward just work
-        because HTMX keeps a history cache of each swap.
+        Every tab swaps the <code>#page</code> region in place via a small
+        <code>fetch()</code>-based helper, updates the URL with
+        <code>history.pushState</code>, and browser back/forward work because
+        the same helper re-fetches the fragment for the current URL on
+        <code>popstate</code>.
     </p>
-    <p class="muted">Built with Flask, Jinja, and htmx.</p>
+    <p class="muted">Built with Flask, Jinja, and a small vanilla JS helper (see static/app.js).</p>
 </section>

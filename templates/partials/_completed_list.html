@@ -4,15 +4,15 @@
         <label class="task-check">
             <input type="checkbox"
                    checked
-                   hx-post="/tasks/{{ task.id }}/toggle?from=completed"
-                   hx-target="#completed-list"
-                   hx-swap="outerHTML">
+                   data-post="/tasks/{{ task.id }}/toggle?from=completed"
+                   data-target="#completed-list"
+                   data-swap="outerHTML">
             <span class="done">{{ task.text }}</span>
         </label>
         <button class="icon-btn danger"
-                hx-delete="/tasks/{{ task.id }}?from=completed"
-                hx-target="#completed-list"
-                hx-swap="outerHTML"
+                data-delete="/tasks/{{ task.id }}?from=completed"
+                data-target="#completed-list"
+                data-swap="outerHTML"
                 title="Delete">
             ✕
         </button>

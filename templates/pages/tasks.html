@@ -2,10 +2,9 @@
 
 <section class="page-body">
     <form class="add-form"
-          hx-post="/tasks"
-          hx-target="#task-list"
-          hx-swap="outerHTML"
-          hx-on::after-request="if(event.detail.successful) this.reset()">
+          data-post="/tasks"
+          data-target="#task-list"
+          data-swap="outerHTML">
         <input type="text" name="text" placeholder="What needs doing?" required autofocus>
         <button type="submit">Add</button>
     </form>
